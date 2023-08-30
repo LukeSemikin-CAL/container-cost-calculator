@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED=1
 
 #INSTALL REQUIREMENTS
 COPY requirements.txt .
-run python -m pip install -r requirements.txt
+RUN python -m pip install -r requirements.txt
 
 WORKDIR /app
 COPY . /app
