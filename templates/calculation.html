@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>
+            Container Cost Calculator
+        </title>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                        <li> 
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </head>
+    <body>
+        <div class = "container">
+            <div class = "row">
+                <div class = "column">
+                    <h1>
+                        Please Enter The Desired Values 
+                    </h1>
+                    <hr>
+                    <table border = "1"
+                        align="right">
+                        <caption> Infrastucture Costs (£)</caption>
+                        <tr>
+                            <th>Container Type</th>
+                            <th>CPU</th>
+                            <th>RAM (per GB) </th>
+                            <th>Storage (per GB) </th>
+                            <th>Backup(per GB) </th>
+                        </tr>
+                        {% for item in  prices %}
+                        <tr>
+                            <td>{{item.name}}</td>
+                            <td align="right">{{item.cpu}}</td>
+                            <td align="right">{{item.ram}}</td>
+                            <td align="right">{{item.storage}}</td>
+                            <td align="right">{{item.backup}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>                    
+                    <form action="/calculation" method ="POST">
+                        <div class = "form-group">
+                            <label>
+                                Container Type
+                            </label>
+                            <input type ="radio" id="Container Type" name = "Container Type" value = "Blades">
+                            <label for = "Container Type">
+                                Blades
+                            </label>
+                            <input type = "radio" id = "Container Type" name = "Container Type" value = "Hyperflex">
+                            <label for = "Container Type">
+                                Hyperflex
+                            </label>
+                        </div>
+                        <div class = "form-group">
+                            <label>
+                                Enter how many CPUs per Container:
+                            </label>
+                            <input type = "number" class = "form-control" id="cpu" name="cpu" placeholder="CPU">
+                        </div>
+                        <div class = "form-group">
+                            <label>
+                                Enter how many GBs of RAM per Container
+                            </label>
+                            <input type = "number" class = "form-control" id="ram" name="ram" placeholder="RAM">
+                        </div>
+                        <div class = "form-group">
+                            <label>
+                                Enter the Total Storage per Container in GBs
+                            </label>
+                            <input type = "number" class = "form-control" id="storage" name ="storage" placeholder="Storage">
+                        </div>
+                        <div class = "form-group">
+                            <label>
+                                Is backup required?
+                            </label>
+                            <input type = "radio" id="option" name= "option" value="Yes">
+                            <label for = "option">
+                                Yes
+                            </label>
+                            <input type ="radio" id="option" name = "option" value ="No">
+                            <label for = "option">
+                                No
+                            </label>
+                        </div>
+                        <div class = "form-group">
+                            <label>
+                                How many Containers of this type are required?
+                            </label>
+                            <input type = "number" class = "form-control" id="ContainerNumber" name="ContainerNumber" placeholder = "Number">
+                        </div>
+                        <button type ="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </form>
+                    <table border="1">
+                        <caption>
+                            Previous Specification Submission
+                        </caption>
+                        <tr>
+                            <th> Container Type</th>
+                            <th> CPU </th>
+                            <th> RAM (GB) </th>
+                            <th> Storage (GB) </th>
+                            <th> Backup (Y/N) </th> 
+                            <th> No of Containers</th> 
+                        </tr>
+                        {% for item in inputs %}
+                        <tr>
+                            <td align="left"> {{item.containertype}} </td>
+                            <td align="right"> {{item.cpu}} </td>
+                            <td align="right"> {{item.ram}} </td>
+                            <td align="right"> {{item.storage}} </td>
+                            <td align="right"> {{item.backup}} </td>
+                            <td align="right"> {{item.containernumber}} </td>
+                        </tr>
+                        {% endfor %}
+                    </table>                    
+                    <table border = 1>
+                        <caption>
+                            Container Costs (£)
+                        </caption>
+                        <tr>
+                            <th>  </th>
+                            <th> Infrastructure Cost (per container)</th>
+                            <th> Infrastructure Total Cost</th>
+                            <th> Platform Engineering Cost</th>
+                        </tr>
+                        {% for item in data %}
+                        <tr>
+                            <td align="right"> 1 </td>
+                            <td align="right"> {{item.infracost}} </td>
+                            <td align="right"> {{item.infratotalcost}} </td>
+                            <td align="right"> {{item.pltecost}} </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

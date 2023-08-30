@@ -1,0 +1,6 @@
+apiVersion: v2
+name: Container Cost Calculator 
+version: 1.0.0
+description: Chart for Container Cost Calculator Example
+metadata:
+  name: container-cost-calculator

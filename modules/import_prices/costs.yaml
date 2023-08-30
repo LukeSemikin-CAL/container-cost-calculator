@@ -1,0 +1,20 @@
+#costs.yaml file
+
+platform:
+  Hyperflex:
+    cpu: 425.68
+    ram: 45.80
+    storage: 2.30
+    backup: 2.00
+
+  Blades:
+    cpu: 407.90
+    ram: 44.32
+    storage: 1.99
+    backup: 2.00
+
+division:
+  PLTE:
+    dayrate: 784
+    contingency: 1.25
+    containercharge: 56
